@@ -2,6 +2,9 @@
 
 This simple script let you switch between Sid, Testing and Stable.
 
+The script is named "s_deb_v.sh"
+which means "Switch_Debian_version.shell"
+
 ## How does it work?
 
 This script updates the /etc/apt/sources.list to the right version you choose.
