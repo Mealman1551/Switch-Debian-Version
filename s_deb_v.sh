@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Functie om de sources.list aan te passen
 update_sources_list() {
     local release=$1
     local codename
 
-    # Verkrijg de codenaam van de release
     case $release in
         "stable")
             codename="bookworm"
@@ -16,35 +14,39 @@ update_sources_list() {
             echo "Switching to Debian Testing (Trixie)..."
             ;;
         "sid")
-            codename="unstable"
+            codename="sid"
             echo "Switching to Debian Sid (Unstable)..."
             ;;
         *)
-            echo "No such command found. choose 'stable', 'testing' of 'sid'."
+            echo "Invalid release selected. Choose 'stable', 'testing', or 'sid'."
             exit 1
             ;;
     esac
 
-    # Werk de /etc/apt/sources.list bij voor de geselecteerde release
-    sudo tee /etc/apt/sources.list > /dev/null <<EOF
-deb http://deb.debian.org/debian/ $codename main contrib non-free
-deb-src http://deb.debian.org/debian/ $codename main contrib non-free
-deb http://security.debian.org/debian-security/ ${codename}-security main contrib non-free
-deb-src http://security.debian.org/debian-security/ ${codename}-security main contrib non-free
-deb http://deb.debian.org/debian/ ${codename}-updates main contrib non-free
-deb-src http://deb.debian.org/debian/ ${codename}-updates main contrib non-free
+    if [ "$codename" = "sid" ]; then
+        sudo tee /etc/apt/sources.list > /dev/null <<EOF
+deb http://deb.debian.org/debian/ $codename main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ $codename main contrib non-free non-free-firmware
 EOF
+    else
+        sudo tee /etc/apt/sources.list > /dev/null <<EOF
+deb http://deb.debian.org/debian/ $codename main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ $codename main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security/ ${codename}-security main contrib non-free non-free-firmware
+deb-src http://security.debian.org/debian-security/ ${codename}-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian/ ${codename}-updates main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ ${codename}-updates main contrib non-free non-free-firmware
+EOF
+    fi
 }
 
-# Gebruiker om input vragen voor de versie die ze willen gebruiken
 echo "Which version of Debian do you want to use?"
 echo "1. Stable (Bookworm)"
 echo "2. Testing (Trixie)"
 echo "3. Sid (Unstable)"
-read -p "Choose (1, 2, or 3): " keuze
+read -p "Choose (1, 2, or 3): " choice
 
-# Pas de sources.list aan op basis van de keuze van de gebruiker
-case $keuze in
+case $choice in
     1)
         update_sources_list "stable"
         ;;
@@ -60,10 +62,9 @@ case $keuze in
         ;;
 esac
 
-# Update en upgrade het systeem
 echo "Updating system to chosen version..."
 sudo apt update
 sudo apt upgrade -y
 sudo apt full-upgrade -y
 
-echo "System updated, please reboot with: 'sudo reboot'"
+echo "System updated. Please reboot with: 'sudo reboot'"
