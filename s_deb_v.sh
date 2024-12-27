@@ -20,10 +20,10 @@ update_sources_list() {
             ;;
         "sid")
             echo "Switching to Debian Sid (Unstable)..."
-            echo "deb http://deb.debian.org/debian/ sid main contrib non-free" | sudo tee /etc/apt/sources.list > /dev/null
-            echo "deb-src http://deb.debian.org/debian/ sid main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
-            echo "deb http://security.debian.org/debian-security/ sid-security main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
-            echo "deb-src http://security.debian.org/debian-security/ sid-security main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+            echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" | sudo tee /etc/apt/sources.list > /dev/null
+            echo "deb-src http://deb.debian.org/debian/ unstable main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+            echo "deb http://security.debian.org/debian-security/ unstable-security main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
+            echo "deb-src http://security.debian.org/debian-security/ unstable-security main contrib non-free" | sudo tee -a /etc/apt/sources.list > /dev/null
             ;;
         *)
             echo "No such command found. choose 'stable', 'testing' of 'sid'."
