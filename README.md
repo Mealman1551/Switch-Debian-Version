@@ -15,4 +15,4 @@ You can use my other script for debloating your upgraded Debian: [Gnome-Corer](h
 
 ![Made with ❤️](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by%20Mealman1551-blue?style=for-the-badge)
 
-###### (c) Mealman1551 2024
+###### © 2025 Mealman1551
