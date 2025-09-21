@@ -6,10 +6,10 @@ update_sources_list() {
 
     case $release in
         "stable")
-            codename="bookworm"
+            codename="trixie"
             ;;
         "trixie")
-            codename="trixie"
+            codename="forky"  #As of 2025, 'forky' is the codename for Debian 14 (testing)
             ;;
         "testing")
             codename="testing"
@@ -18,7 +18,7 @@ update_sources_list() {
             codename="sid"
             ;;
         *)
-            echo "Invalid release selected. Choose 'stable', 'trixie', 'testing', or 'sid'."
+            echo "Invalid release selected. Choose 'stable', 'forky', 'testing', or 'sid'."
             exit 1
             ;;
     esac
@@ -41,8 +41,8 @@ EOF
 }
 
 echo "Which version of Debian do you want to use?"
-echo "1. Stable (Bookworm)"
-echo "2. Testing (Trixie)"
+echo "1. Stable (Trixie)"
+echo "2. Testing (Forky)"
 echo "3. Testing (Rolling)"
 echo "4. Sid (Unstable)"
 read -p "Choose (1, 2, 3, or 4): " choice
@@ -52,7 +52,7 @@ case $choice in
         update_sources_list "stable"
         ;;
     2)
-        update_sources_list "trixie"
+        update_sources_list "forky"
         ;;
     3)
         update_sources_list "testing"
