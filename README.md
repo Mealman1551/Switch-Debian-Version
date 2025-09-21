@@ -1,6 +1,6 @@
 # Switch-Debian-Version
 
-> [!Note]
+> [!Warning]
 > Im still testing this on Debian 13 Trixie
 
 This simple script let you switch between Sid, Testing and Stable.
